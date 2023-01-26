@@ -2,7 +2,8 @@ import { Request, Response } from "express";
 import { userService } from "./user.service";
 
 import { IUser } from "../../models/user.model";
-
+import { CreateUserDTO } from "./dtos/req/create-user.dto";
+import { validate } from "class-validator";
 /**
  * Returns list of up to 5 mentors that match parameters
  * @param payload - Recommended mentors search parameters
@@ -10,9 +11,17 @@ import { IUser } from "../../models/user.model";
  */
 
 const createUser = async (req: Request, res: Response) => {
-  console.log(req.body);
-  if (!req.body) {
-    return res.status(400).send("User payload is empty!");
+
+  //validation
+  const newUserDTO = new CreateUserDTO();
+  newUserDTO.firstName = req.body.first_name;
+  newUserDTO.lastName = req.body.last_name;
+  newUserDTO.email = req.body.email;
+  newUserDTO.password = req.body.password;
+
+  const errors = await validate(newUserDTO);
+  if (errors.length) {
+    return res.status(400).send(errors)
   }
 
   const userProfile: IUser | null = await userService.getUserByEmail(

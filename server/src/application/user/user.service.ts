@@ -1,5 +1,7 @@
 import { UserRepository } from "../../repositories/user.repository";
 import { CreateUserPayload } from "./contracts/user.contracts";
+import { CreateUserDTO } from "./dtos/req/create-user.dto";
+
 
 const userRepository = new UserRepository()
 
