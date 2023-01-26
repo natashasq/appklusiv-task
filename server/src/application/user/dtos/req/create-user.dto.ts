@@ -16,8 +16,7 @@ export class CreateUserDTO {
       args: { property: "First name" },
     },
   })
-  @Expose({ name: "first_name" })
-  firstName!: string;
+  first_name!: string;
 
   @IsNotEmpty({
     context: {
@@ -33,8 +32,7 @@ export class CreateUserDTO {
       args: { property: "Last name" },
     },
   })
-  @Expose({ name: "last_name" })
-  lastName!: string;
+  last_name!: string;
 
   @IsNotEmpty({
     context: {

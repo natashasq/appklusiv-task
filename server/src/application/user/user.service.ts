@@ -1,25 +1,16 @@
 import { UserRepository } from "../../repositories/user.repository";
-import { CreateUserPayload } from "./contracts/user.contracts";
-import { CreateUserDTO } from "./dtos/req/create-user.dto";
 
+const userRepository = new UserRepository();
 
-const userRepository = new UserRepository()
+const getUserByEmail = (email: string) => {
+  return userRepository.getUserByEmail(email);
+};
 
+const getUserById = (id: string) => {
+  return userRepository.getUserById(id);
+};
 
-  const createUser = (data: CreateUserPayload): any => {
-    return userRepository.createUser(data);
-  }
-
-  const getUserByEmail = (email: string) => {
-    return userRepository.getUserByEmail(email)
-  }
-
-  const getUserById = (id: string) => {
-   return userRepository.getUserById(id)
-  }
-
-  export const userService = {
-    createUser,
-    getUserByEmail,
-    getUserById
-  }
+export const userService = {
+  getUserByEmail,
+  getUserById,
+};
