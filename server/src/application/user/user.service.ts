@@ -2,13 +2,9 @@ import { UserRepository } from "../../repositories/user.repository";
 
 const userRepository = new UserRepository();
 
-const getUserByEmail = (email: string) => {
-  return userRepository.getUserByEmail(email);
-};
+const getUserByEmail = (email: string) => userRepository.getUserByEmail(email);
 
-const getUserById = (id: string) => {
-  return userRepository.getUserById(id);
-};
+const getUserById = (id: string) => userRepository.getUserById(id);
 
 export const userService = {
   getUserByEmail,

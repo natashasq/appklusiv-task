@@ -7,21 +7,17 @@ import { CreateUserDTO } from "../user/dtos/req/create-user.dto";
 import { userService } from "../user/user.service";
 import { authService } from "./auth.service";
 import jwt from "jsonwebtoken";
-/**
- * Returns list of up to 5 mentors that match parameters
- * @param payload - Recommended mentors search parameters
- * @returns List of up to 5 mentors
- */
 
 const signUp = async (req: Request, res: Response) => {
-  //validation
   const newUserDTO = new CreateUserDTO();
+
   newUserDTO.first_name = req.body.first_name;
   newUserDTO.last_name = req.body.last_name;
   newUserDTO.email = req.body.email;
   newUserDTO.password = req.body.password;
 
   const errors = await validate(newUserDTO);
+
   if (errors.length) {
     return res.status(400).send(errors);
   }
@@ -29,6 +25,7 @@ const signUp = async (req: Request, res: Response) => {
   const userProfile: IUser | null = await userService.getUserByEmail(
     req.body.email
   );
+
   if (userProfile) {
     return res.status(400).send("The user with this email already exists.");
   }
@@ -55,10 +52,12 @@ const login = async (req: Request, res: Response) => {
   const isPasswordValid = compareSync(req.body.password, user.password);
 
   if (!isPasswordValid) {
-    res.status(404).send("Invalid password");
+    return res.status(404).send("Invalid password");
   }
 
-  const token = jwt.sign({ id: user.id }, `${process.env.JWT_SECRET_KEY}`, {expiresIn: 86400});
+  const token = jwt.sign({ id: user.id }, `${process.env.JWT_SECRET_KEY}`, {
+    expiresIn: 86400,
+  });
 
   return res
     .cookie("access_token", token, {
@@ -69,16 +68,14 @@ const login = async (req: Request, res: Response) => {
     .json({ message: "Logged in successfully" });
 };
 
-const logout =  (req: Request, res: Response) => {
-    return res
-      .clearCookie("access_token")
-      .status(200)
-      .json({ message: "Successfully logged out." });
-  };
-  
+const logout = (req: Request, res: Response) =>
+  res
+    .clearCookie("access_token")
+    .status(200)
+    .json({ message: "Successfully logged out." });
 
 export const authController = {
   signUp,
   login,
-  logout
+  logout,
 };

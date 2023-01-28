@@ -14,7 +14,7 @@ export class UserRepository {
   }
 
   async getUserById(id: string) {
-    const user = await User.findById(id);
+    const user = await User.findById(id).select("first_name last_name -_id");
     return user;
   }
 }
