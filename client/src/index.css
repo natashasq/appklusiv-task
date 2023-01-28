@@ -1,0 +1,13 @@
+body {
+  margin: 0;
+  font-family: 'Pacifico', cursive;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  outline: 0;
+  box-sizing: border-box;
+}
+
+code {
+  font-family: 'Pacifico', cursive;
+}
