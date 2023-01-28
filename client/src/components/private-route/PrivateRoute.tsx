@@ -1,7 +1,11 @@
 import { ReactNode } from "react";
 import { Navigate } from "react-router-dom";
-import { useAuthState } from "../../contexts/AuthContext";
+
+//routes
 import { appRoutes, APP_ROUTES } from "../../types/constants/routes";
+
+//contexts
+import { useAuthState } from "../../contexts/AuthContext";
 
 type PrivateRouteProps = {
   children: ReactNode;

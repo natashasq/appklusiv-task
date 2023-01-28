@@ -1,9 +1,12 @@
 import { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
-import PrivateRoute from "../../components/private-route/PrivateRoute";
+
+//routes
 import { appRoutes, APP_ROUTES } from "../../types/constants/routes";
 
-//Rputes
+//components
+import PrivateRoute from "../../components/private-route/PrivateRoute";
+
 const Home = lazy(() => import("../home/Home"));
 const Login = lazy(() => import("../login/Login"));
 const Signup = lazy(() => import("../signup/Signup"));

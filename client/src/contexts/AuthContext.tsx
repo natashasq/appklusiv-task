@@ -5,10 +5,17 @@ import {
   useContext,
   useEffect,
 } from "react";
-import { authService, TLoginPayload } from "../service/auth.service";
 import { useNavigate } from "react-router-dom";
+
+//routes
 import { appRoutes, APP_ROUTES } from "../types/constants/routes";
+
+//types
+import { TLoginPayload, TSignupPayload } from "../service/auth.service";
+
+//services
 import { userService } from "../service/user.service.";
+import { authService } from "../service/auth.service";
 
 type AuthProviderProps = {
   children: ReactNode;
@@ -29,10 +36,12 @@ type TUser = {
 };
 
 type AuthActionsContextProps = {
+  signup: signupCallback;
   login: loginCallback;
   logout: logoutCallback;
 };
 
+type signupCallback = (signupPayload: TSignupPayload) => void;
 type loginCallback = (loginPayload: TLoginPayload) => void;
 type logoutCallback = () => void;
 
@@ -43,6 +52,7 @@ const AuthStateContext = createContext<AuthStateContextProps>({
 });
 
 const AuthActionsContext = createContext<AuthActionsContextProps>({
+  signup: () => {},
   login: () => {},
   logout: () => {},
 });
@@ -56,6 +66,17 @@ export function AuthProvider({ children }: AuthProviderProps) {
     useState<TIsAuthenticated>(false);
   const [user, setUser] = useState<TUser | null>(null);
   const navigate = useNavigate();
+
+  const signup = async (signupPayload: TSignupPayload) => {
+    try {
+      await authService.signup(signupPayload);
+      navigate(appRoutes[APP_ROUTES.LOGIN]);
+      setLoading(false);
+    } catch (e) {
+      setIsAuthenticated(false);
+      setLoading(false);
+    }
+  };
 
   const login = async (loginPayload: TLoginPayload) => {
     try {
@@ -99,7 +120,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   return (
     <AuthStateContext.Provider value={{ isAuthenticated, user, loading }}>
-      <AuthActionsContext.Provider value={{ login, logout }}>
+      <AuthActionsContext.Provider value={{ signup, login, logout }}>
         {children}
       </AuthActionsContext.Provider>
     </AuthStateContext.Provider>
