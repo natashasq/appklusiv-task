@@ -5,11 +5,20 @@ import { useAuthActions } from "../../contexts/AuthContext";
 
 //types
 import { TLoginPayload } from "../../service/auth.service";
+import {
+  buttonLabels,
+  BUTTON_LABELS,
+  inputLabels,
+  INPUT_LABELS,
+} from "../../types/constants/labels";
 
 //components
 import { Button } from "../../components/button/Button";
 import { EmailInput } from "../../components/input/EmailInput";
 import { PasswordInput } from "../../components/input/PasswordInput";
+
+//styled
+import { Form } from "../../components/input/Input.styled";
 
 function Login() {
   const { login } = useAuthActions();
@@ -24,23 +33,21 @@ function Login() {
   };
 
   return (
-    <>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <EmailInput
-          name="email"
-          label="Email"
-          register={register}
-          error={errors.email?.message}
-        />
-        <PasswordInput
-          name="password"
-          label="Password"
-          register={register}
-          error={errors.password?.message}
-        />
-        <Button type="submit" text="Login" />
-      </form>
-    </>
+    <Form onSubmit={handleSubmit(onSubmit)}>
+      <EmailInput
+        name="email"
+        label={inputLabels[INPUT_LABELS.email]}
+        register={register}
+        error={errors.email?.message}
+      />
+      <PasswordInput
+        name="password"
+        label={inputLabels[INPUT_LABELS.password]}
+        register={register}
+        error={errors.password?.message}
+      />
+      <Button type="submit" text={buttonLabels[BUTTON_LABELS.login]} />
+    </Form>
   );
 }
 

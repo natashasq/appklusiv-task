@@ -1,3 +1,5 @@
+import { StyledButton } from "./Button.styled";
+
 type ButtonProps = {
   text: string;
   type: "button" | "submit" | "reset" | undefined;
@@ -7,9 +9,9 @@ type ButtonProps = {
 export function Button({ text, type, onClick }: ButtonProps) {
   return (
     <>
-      <button type={type} onClick={onClick}>
+      <StyledButton type={type} onClick={onClick}>
         {text}
-      </button>
+      </StyledButton>
     </>
   );
 }

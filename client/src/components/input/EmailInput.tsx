@@ -6,6 +6,16 @@ import {
   FieldErrorsImpl,
 } from "react-hook-form";
 
+//styled
+import { Input, InputError, Label } from "./Input.styled";
+
+//types
+import { appErrors, ERROR_KEYS } from "../../types/constants/errors";
+import {
+  inputPlaceholders,
+  INPUT_PLACEHOLDERS,
+} from "../../types/constants/labels";
+
 type TextInputProps = {
   name: string;
   label: string;
@@ -20,17 +30,18 @@ type TextInputProps = {
 export function EmailInput({ name, label, register, error }: TextInputProps) {
   return (
     <>
-      <label>{label}</label>
-      <input
+      <Label>{label}</Label>
+      <Input
+        placeholder={inputPlaceholders[INPUT_PLACEHOLDERS.email]}
         {...register(name, {
-          required: "Email Address is required",
+          required: appErrors[ERROR_KEYS.email].required,
           pattern: {
             value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-            message: "Invalid email address.",
+            message: appErrors[ERROR_KEYS.email].invalid!,
           },
         })}
       />
-      {error && <p>{`${error}`}</p>}
+      {error && <InputError>{`${error}`}</InputError>}
     </>
   );
 }

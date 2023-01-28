@@ -6,6 +6,7 @@ import { appRoutes, APP_ROUTES } from "../../types/constants/routes";
 
 //components
 import PrivateRoute from "../../components/private-route/PrivateRoute";
+import { Layout } from "../../components/layout/Layout";
 
 const Home = lazy(() => import("../home/Home"));
 const Login = lazy(() => import("../login/Login"));
@@ -24,8 +25,22 @@ function AppRoutes() {
           </PrivateRoute>
         }
       />
-      <Route path={appRoutes[APP_ROUTES.LOGIN]} element={<Login />} />
-      <Route path={appRoutes[APP_ROUTES.SIGNUP]} element={<Signup />} />
+      <Route
+        path={appRoutes[APP_ROUTES.LOGIN]}
+        element={
+          <Layout>
+            <Login />
+          </Layout>
+        }
+      />
+      <Route
+        path={appRoutes[APP_ROUTES.SIGNUP]}
+        element={
+          <Layout>
+            <Signup />
+          </Layout>
+        }
+      />
     </Routes>
   );
 }

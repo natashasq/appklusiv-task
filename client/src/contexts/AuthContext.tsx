@@ -105,7 +105,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
     (async () => {
       try {
         const userData = await userService.getUser();
-        console.log(userData, "userData");
         setUser(userData);
         setIsAuthenticated(true);
         navigate(appRoutes[APP_ROUTES.HOME]);

@@ -7,6 +7,9 @@ import { appRoutes, APP_ROUTES } from "../../types/constants/routes";
 //contexts
 import { useAuthState } from "../../contexts/AuthContext";
 
+//components
+import { Layout } from "../layout/Layout";
+
 type PrivateRouteProps = {
   children: ReactNode;
 };
@@ -14,14 +17,12 @@ type PrivateRouteProps = {
 function PrivateRoute({ children }: PrivateRouteProps) {
   const { isAuthenticated, loading } = useAuthState();
 
-  console.log(isAuthenticated, "isAuthenticated");
-
   if (loading) {
     return <div>Loading...</div>;
   }
 
   if (isAuthenticated) {
-    return <>{children}</>;
+    return <Layout>{children}</Layout>;
   }
 
   return <Navigate to={appRoutes[APP_ROUTES.SIGNUP]} />;

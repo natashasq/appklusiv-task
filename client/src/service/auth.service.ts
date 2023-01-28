@@ -1,5 +1,8 @@
 import { httpMethods } from "../types/http/http-methods";
 
+//utils
+import { fetchEnhanced } from "./utils";
+
 export type TSignupPayload = {
   firstName: string;
   lastName: string;
@@ -14,47 +17,36 @@ export type TLoginPayload = {
 
 export const authService = {
   signup: async ({ firstName, lastName, email, password }: TSignupPayload) => {
-    const response = await fetch(`${process.env.REACT_APP_API_URL}/signup`, {
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Credentials": "true",
-      },
-      credentials: "include",
+    const data = await fetchEnhanced({
+      url: "signup",
       method: httpMethods.POST,
-      body: JSON.stringify({
+      params: {
         first_name: firstName,
         last_name: lastName,
         email,
         password,
-      }),
+      },
     });
-    const data = response.json();
+
     return data;
   },
 
   login: async ({ email, password }: TLoginPayload) => {
-    const response = await fetch(`${process.env.REACT_APP_API_URL}/login`, {
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Credentials": "true",
-      },
-      credentials: "include",
+    const data = await fetchEnhanced({
+      url: "login",
       method: httpMethods.POST,
-      body: JSON.stringify({ email, password }),
+      params: { email, password },
     });
-    const data = response.json();
+
     return data;
   },
 
   logout: async () => {
-    const response = await fetch(`${process.env.REACT_APP_API_URL}/logout`, {
-      headers: {
-        "Access-Control-Allow-Credentials": "true",
-      },
-      credentials: "include",
+    const data = await fetchEnhanced({
+      url: "logout",
       method: httpMethods.POST,
     });
-    const data = response.json();
+
     return data;
   },
 };

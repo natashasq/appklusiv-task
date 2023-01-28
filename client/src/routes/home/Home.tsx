@@ -1,19 +1,16 @@
-import { useAuthActions } from "../../contexts/AuthContext";
+//contexts
+import { useAuthState } from "../../contexts/AuthContext";
 
-//components
-import { Button } from "../../components/button/Button";
+//styled
+import { HomeTitle } from "./Home.styled";
 
 function Home() {
-  const { logout } = useAuthActions();
-  const handleClick = () => {
-    logout();
-  };
+  const { user } = useAuthState();
 
   return (
-    <>
-      Home
-      <Button type="button" text="Logout" onClick={handleClick} />
-    </>
+    <HomeTitle>
+      Welcome {user?.firstName} {user?.lastName}
+    </HomeTitle>
   );
 }
 
