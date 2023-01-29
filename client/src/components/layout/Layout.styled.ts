@@ -12,8 +12,8 @@ export const StyledLayout = styled.div`
 
 export const Header = styled.div`
   display: flex;
-  justify-content: space-between;
-  padding: 0 20px;
+  justify-content: flex-end;
+  padding: 20px;
   position: fixed;
   top: 0;
   right: 0;
