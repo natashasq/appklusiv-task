@@ -23,4 +23,5 @@ export const Header = styled.div`
 export const ErrorMessage = styled.span`
   color: crimson;
   font-size: 18px;
+  margin-right: auto;
 `;

@@ -18,7 +18,7 @@ import { EmailInput } from "../../components/input/EmailInput";
 import { PasswordInput } from "../../components/input/PasswordInput";
 
 //styled
-import { Form } from "../../components/input/Input.styled";
+import { Form, FormButtonWrapper } from "../../components/input/Input.styled";
 
 function Login() {
   const { login } = useAuthActions();
@@ -46,7 +46,9 @@ function Login() {
         register={register}
         error={errors.password?.message}
       />
-      <Button type="submit" text={buttonLabels[BUTTON_LABELS.login]} />
+      <FormButtonWrapper>
+        <Button type="submit" text={buttonLabels[BUTTON_LABELS.login]} />
+      </FormButtonWrapper>
     </Form>
   );
 }

@@ -16,7 +16,7 @@ export const Form = styled.form`
   justify-content: center;
   gap: 10px;
   align-items: center;
-  color: #FAFDF3;
+  color: #fafdf3;
   width: 400px;
   padding: 0 50px;
 `;
@@ -29,4 +29,8 @@ export const InputError = styled.span`
   margin-left: auto;
   color: crimson;
   font-size: 14px;
+`;
+
+export const FormButtonWrapper = styled.div`
+  margin-top: 20px;
 `;

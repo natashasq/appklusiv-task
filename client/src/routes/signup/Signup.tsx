@@ -21,7 +21,7 @@ import { PasswordInput } from "../../components/input/PasswordInput";
 import { TextInput } from "../../components/input/TextInput";
 
 //styled
-import { Form } from "../../components/input/Input.styled";
+import { Form, FormButtonWrapper } from "../../components/input/Input.styled";
 
 function Signup() {
   const { signup } = useAuthActions();
@@ -62,7 +62,9 @@ function Signup() {
         register={register}
         error={errors.password?.message}
       />
-      <Button type="submit" text={buttonLabels[BUTTON_LABELS.signup]} />
+      <FormButtonWrapper>
+        <Button type="submit" text={buttonLabels[BUTTON_LABELS.signup]} />
+      </FormButtonWrapper>
     </Form>
   );
 }
