@@ -1,5 +1,8 @@
-import { CreateUserPayload } from "../application/user/contracts/user.contracts";
+//models
 import { User } from "../models/user.model";
+
+//types
+import { CreateUserPayload } from "../application/user/contracts/user.contracts";
 
 export class UserRepository {
   constructor() {}
