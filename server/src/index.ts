@@ -1,11 +1,12 @@
+import express, { Request, Response, NextFunction, Express } from "express";
 import * as dotenv from "dotenv";
-import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
+import cookieParser from "cookie-parser";
+
+//routes
 import userRpoutes from "./routes/user.route";
 import authRoutes from "./routes/auth.route";
-import cookieParser from "cookie-parser";
-import { Request, Response, NextFunction } from "express";
 
 dotenv.config();
 
@@ -13,10 +14,10 @@ if (!process.env.PORT) {
   process.exit(1);
 }
 const PORT: number = parseInt(process.env.PORT as string, 10);
-const app = express();
+const app: Express = express();
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: process.env.CLIENT_ORIGIN,
     credentials: true,
   })
 );
