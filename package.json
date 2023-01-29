@@ -1,0 +1,28 @@
+{
+  "name": "appklusiv-task",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "npm run dev --prefix server",
+    "client": "npm run start --prefix client",
+    "server:setup": "cd server && npm install",
+    "client:setup": "cd client && npm install",
+    "setup:dev": "concurrently -n 'server,client' -c 'red,green' \"npm run server:setup\" \"npm run client:setup\"",
+    "start:dev": "concurrently -n 'server,client' -c 'red,green' \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/natashasq/appklusiv-task.git"
+  },
+  "author": "Natasa Zecevic",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/natashasq/appklusiv-task/issues"
+  },
+  "homepage": "https://github.com/natashasq/appklusiv-task#readme",
+  "dependencies": {
+    "concurrently": "^7.6.0"
+  }
+}
