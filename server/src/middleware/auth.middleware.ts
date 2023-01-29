@@ -8,9 +8,7 @@ const verifyToken = (req: Request, res: Response, next: NextFunction) => {
   const token: string = req.cookies.access_token;
 
   if (!token) {
-    return res.status(403).send({
-      message: appMessages[APP_MESSAGES.noToken],
-    });
+    return res.status(403).send("");
   }
 
   try {

@@ -10,11 +10,11 @@ import { buttonLabels, BUTTON_LABELS } from "../../types/constants/labels";
 import { Button } from "../button/Button";
 
 //styled
-import { Header, StyledLayout } from "./Layout.styled";
+import { ErrorMessage, Header, StyledLayout } from "./Layout.styled";
 
 export function Layout({ children }: { children: ReactNode }) {
   const { logout } = useAuthActions();
-  const { isAuthenticated } = useAuthState();
+  const { isAuthenticated, error } = useAuthState();
   const handleClick = () => {
     logout();
   };
@@ -22,6 +22,7 @@ export function Layout({ children }: { children: ReactNode }) {
   return (
     <StyledLayout>
       <Header>
+        {error && <ErrorMessage>{error}</ErrorMessage>}
         {isAuthenticated && (
           <Button
             type="button"

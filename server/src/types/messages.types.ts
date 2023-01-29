@@ -15,5 +15,5 @@ export const appMessages: Record<APP_MESSAGES, string> = {
   [APP_MESSAGES.invalidPassword]: "Invalid password.",
   [APP_MESSAGES.loggedIn]: "Logged in successfully.",
   [APP_MESSAGES.loggedOut]: "Successfully logged out.",
-  [APP_MESSAGES.noToken]: "NO_TOKEN",
+  [APP_MESSAGES.noToken]: "No token provided.",
 };

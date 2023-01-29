@@ -34,7 +34,8 @@ export const fetchEnhanced = async ({
   );
 
   if (!response.ok) {
-    throw new Error(response.statusText);
+    const errorMessage = await response.text();
+    throw new Error(errorMessage);
   }
 
   const result = await response.json();

@@ -12,10 +12,15 @@ export const StyledLayout = styled.div`
 
 export const Header = styled.div`
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   padding: 0 20px;
   position: fixed;
   top: 0;
   right: 0;
   left: 0;
+`;
+
+export const ErrorMessage = styled.span`
+  color: crimson;
+  font-size: 18px;
 `;
