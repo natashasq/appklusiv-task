@@ -17,6 +17,9 @@ import { TLoginPayload, TSignupPayload } from "../service/auth.service";
 import { userService } from "../service/user.service.";
 import { authService } from "../service/auth.service";
 
+//utils
+import { getErrorMessage } from "../utils/get-error-message";
+
 type AuthProviderProps = {
   children: ReactNode;
 };
@@ -25,6 +28,7 @@ type AuthStateContextProps = {
   isAuthenticated: TIsAuthenticated;
   user: TUser | null;
   loading: TLoading;
+  error: TError;
 };
 
 type TIsAuthenticated = boolean;
@@ -34,6 +38,8 @@ type TUser = {
   firstName: string;
   lastName: string;
 };
+
+type TError = string;
 
 type AuthActionsContextProps = {
   signup: signupCallback;
@@ -49,6 +55,7 @@ const AuthStateContext = createContext<AuthStateContextProps>({
   isAuthenticated: false,
   user: null,
   loading: true,
+  error: "",
 });
 
 const AuthActionsContext = createContext<AuthActionsContextProps>({
@@ -65,6 +72,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const [isAuthenticated, setIsAuthenticated] =
     useState<TIsAuthenticated>(false);
   const [user, setUser] = useState<TUser | null>(null);
+  const [error, setError] = useState<TError>("");
   const navigate = useNavigate();
 
   const signup = async (signupPayload: TSignupPayload) => {
@@ -73,6 +81,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       navigate(appRoutes[APP_ROUTES.LOGIN]);
       setLoading(false);
     } catch (e) {
+      setError(getErrorMessage(e));
       setIsAuthenticated(false);
       setLoading(false);
     }
@@ -85,6 +94,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       navigate(appRoutes[APP_ROUTES.HOME]);
       setLoading(false);
     } catch (e) {
+      setError(getErrorMessage(e));
       setIsAuthenticated(false);
       setLoading(false);
     }
@@ -97,6 +107,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       setLoading(false);
       navigate(appRoutes[APP_ROUTES.SIGNUP]);
     } catch (e) {
+      setError(getErrorMessage(e));
       setLoading(false);
     }
   };
@@ -110,6 +121,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         navigate(appRoutes[APP_ROUTES.HOME]);
         setLoading(false);
       } catch (e) {
+        setError(getErrorMessage(e));
         setUser(null);
         setIsAuthenticated(false);
         setLoading(false);
@@ -118,7 +130,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }, [navigate]);
 
   return (
-    <AuthStateContext.Provider value={{ isAuthenticated, user, loading }}>
+    <AuthStateContext.Provider
+      value={{ isAuthenticated, user, loading, error }}
+    >
       <AuthActionsContext.Provider value={{ signup, login, logout }}>
         {children}
       </AuthActionsContext.Provider>
