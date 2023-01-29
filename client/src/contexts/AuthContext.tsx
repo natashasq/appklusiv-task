@@ -129,6 +129,12 @@ export function AuthProvider({ children }: AuthProviderProps) {
     })();
   }, [navigate]);
 
+  useEffect(() => {
+    if (error) {
+      setTimeout(() => setError(""), 3000);
+    }
+  }, [error]);
+
   return (
     <AuthStateContext.Provider
       value={{ isAuthenticated, user, loading, error }}
